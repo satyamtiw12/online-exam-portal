@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>My Results</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+    body{background:linear-gradient(135deg,#141e30,#243b55);min-height:100vh;padding:40px;}
+    .container{max-width:900px;margin:auto;}
+    h1{color:white;text-align:center;margin-bottom:35px;font-size:32px;}
+    .card{background:white;padding:40px;border-radius:20px;
+      box-shadow:0 15px 40px rgba(0,0,0,0.18);}
+    table{width:100%;border-collapse:collapse;margin-bottom:30px;}
+    th,td{padding:12px 15px;border:1px solid #ddd;font-size:16px;}
+    th{background:#007bff;color:white;}
+    .badge{padding:5px 14px;border-radius:20px;font-size:13px;font-weight:700;}
+    .pass{background:#d4edda;color:#155724;}
+    .fail{background:#f8d7da;color:#721c24;}
+    .btn-group{display:flex;gap:20px;justify-content:center;margin-top:10px;}
+    .btn-group a{padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:700;}
+    .btn-blue{background:#007bff;color:white;}
+    .btn-red{background:#dc3545;color:white;}
+    .no-result{font-size:18px;color:#666;padding:30px 0;text-align:center;}
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>My Assessment Results</h1>
+  <div class="card">
+    <% if (results.length > 0) { %>
+      <table>
+        <tr>
+          <th>Exam Name</th><th>Score</th><th>Percentage</th>
+          <th>Status</th><th>Submitted On</th>
+        </tr>
+        <% results.forEach(r => {
+          const pct = r.total_marks > 0 ? (r.score / r.total_marks * 100).toFixed(2) : 0;
+          const pass = pct >= 40;
+        %>
+        <tr>
+          <td><%= r.exam_title %></td>
+          <td><%= r.score %> / <%= r.total_marks %></td>
+          <td><%= pct %>%</td>
+          <td><span class="badge <%= pass ? 'pass' : 'fail' %>"><%= pass ? 'PASS' : 'FAIL' %></span></td>
+          <td><%= new Date(r.submitted_at).toLocaleString('en-IN') %></td>
+        </tr>
+        <% }) %>
+      </table>
+    <% } else { %>
+      <div class="no-result">You have not attempted any exams yet.</div>
+    <% } %>
+    <div class="btn-group">
+      <a href="/dashboard" class="btn-blue">Go to Dashboard</a>
+      <a href="/logout" class="btn-red">Logout</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

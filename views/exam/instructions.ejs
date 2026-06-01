@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>Instructions</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+    body{background:#e5e5e5;display:flex;justify-content:center;align-items:center;height:100vh;}
+    .box{background:white;width:560px;padding:35px 40px;border-radius:10px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.15);display:flex;flex-direction:column;
+      justify-content:space-between;min-height:480px;}
+    h3{font-size:22px;font-weight:600;margin-bottom:15px;}
+    .exam-title{font-weight:600;font-size:18px;margin-bottom:15px;color:#444;}
+    .details{font-size:16px;margin-bottom:18px;line-height:1.6;color:#555;}
+    .rules strong{font-size:17px;}
+    .rules ul{padding-left:22px;margin-top:10px;}
+    .rules ul li{margin-bottom:8px;font-size:15px;color:#444;}
+    .bottom{margin-top:20px;}
+    .checkbox{font-size:15px;margin-bottom:12px;}
+    .btn{width:160px;background:#4a90e2;color:white;padding:11px 20px;border:none;
+      border-radius:6px;cursor:pointer;font-size:16px;transition:0.3s;}
+    .btn:hover{background:#2f75c1;}
+    .btn:disabled{background:#a8a8a8;cursor:not-allowed;}
+  </style>
+  <script>
+    function toggleButton(){
+      document.getElementById('startBtn').disabled = !document.getElementById('agree').checked;
+    }
+    function startExam(){
+      window.location.href = '/exam?exam_id=<%= exam.id %>';
+    }
+  </script>
+</head>
+<body>
+<div class="box">
+  <div>
+    <h3>Good Luck, <%= username %>!</h3>
+    <div class="exam-title">[<%= exam.exam_title %>]</div>
+    <div class="details">
+      Duration: <%= exam.duration %> minutes<br>
+      Total Marks: 100
+    </div>
+    <div class="rules">
+      <strong>Instructions / Rules</strong>
+      <ul>
+        <li>All questions are compulsory.</li>
+        <li>Do not refresh the page.</li>
+        <li>Switching tabs will auto-submit the exam.</li>
+        <li>Exam cannot be paused once started.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="checkbox">
+      <input type="checkbox" id="agree" onclick="toggleButton()">
+      I agree to the Terms & Conditions
+    </div>
+    <button class="btn" id="startBtn" onclick="startExam()" disabled>Start Exam</button>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+      body {
+ background-image: url('https://erp.mmumullana.org/assets/assets1/images/bg-auth.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+display:flex;justify-content:center;align-items:center;min-height:100vh;
+    }
+    .box{background:white;width:420px;padding:40px;border-radius:16px;
+      box-shadow:0 20px 50px rgba(0,0,0,0.3);}
+    .logo{width:100%;max-width:200px;display:block;margin:0 auto 25px;}
+    h2{text-align:center;color:#333;margin-bottom:25px;font-size:24px;}
+    label{display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:5px;}
+    input{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:15px;
+      margin-bottom:18px;transition:0.3s;}
+    input:focus{border-color:#667eea;outline:none;}
+    button{width:100%;padding:14px;background:#2575fc;
+      color:white;border:none;border-radius:8px;font-size:16px;font-weight:600;
+      cursor:pointer;transition:0.3s;}
+    button:hover{opacity:0.9;}
+    .links{text-align:center;margin-top:18px;font-size:14px;color:#666;}
+    .links a{color:#667eea;text-decoration:none;font-weight:600;}
+    body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+.box { position: relative; z-index: 1; }
+  </style>
+</head>
+<body>
+<div class="box">
+  <img src="https://erp.mmumullana.org/assets/assets1/images/logo.webp" class="logo" alt="Logo">
+  <h2>Create Account</h2>
+
+  <%- include('../partials/flash') %>
+
+  <form method="POST" action="/register">
+    <label>Username</label>
+    <input type="text" name="username" placeholder="Username / Roll No" required>
+    <label>Email</label>
+    <input type="email" name="email" placeholder="Email" required>
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Password" required>
+     <!-- (8+ chars, A-Z, a-z, 0-9, @$!%) -->
+    <button type="submit">Register</button>
+  </form>
+
+  <div class="links">
+    <p>Already have an account? <a href="/login">Login</a></p>
+  </div>
+</div>
+</body>
+</html>

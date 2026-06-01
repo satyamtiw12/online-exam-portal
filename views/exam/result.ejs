@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>Result</title>
+  <style>
+    body{margin:0;font-family:Arial,sans-serif;background:#dcdcdc;}
+    .bar{background:#e6e6e6;padding:12px;text-align:center;font-weight:bold;border-bottom:1px solid #c5c5c5;}
+    .box{width:650px;margin:40px auto;background:#fff;padding:30px 40px;border:1px solid #cfcfcf;}
+    .title{font-weight:bold;margin-bottom:25px;font-size:18px;}
+    .score{font-size:20px;margin-bottom:8px;}
+    .msg{color:#444;margin-bottom:30px;}
+    .btns{display:flex;gap:15px;}
+    .btn-blue{background:#4a90e2;color:white;padding:8px 20px;border:none;
+      text-decoration:none;font-size:14px;}
+    .btn-grey{background:#b5b5b5;color:white;padding:8px 20px;
+      text-decoration:none;font-size:14px;}
+  </style>
+</head>
+<body>
+<div class="bar">Result Screen</div>
+<div class="box">
+  <div class="title">[<%= exam.exam_title %>]</div>
+  <div class="score">Your Score: <%= result.score %> / <%= result.total_marks %></div>
+  <div class="msg">Well done! Check the dashboard for performance.</div>
+  <div class="btns">
+    <a href="/dashboard" class="btn-blue">Go to Dashboard</a>
+    <a href="/logout" class="btn-grey">Logout</a>
+  </div>
+</div>
+</body>
+</html>

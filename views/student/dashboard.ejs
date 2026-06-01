@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>Dashboard</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+    body{display:flex;background:#f4f6f9;min-height:100vh;}
+    .sidebar{width:250px;height:100vh;background:linear-gradient(180deg,#141e30,#243b55);
+      padding:25px;color:white;position:fixed;}
+    .sidebar h2{margin-bottom:30px;font-weight:600;}
+    .sidebar a{display:block;color:white;text-decoration:none;margin:15px 0;
+      padding:10px;border-radius:6px;transition:0.3s;}
+    .sidebar a:hover{background:rgba(255,255,255,0.2);}
+    .main{margin-left:250px;padding:40px;flex:1;}
+    .header{background:white;padding:25px;border-radius:15px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.08);margin-bottom:30px;}
+    .header h1{font-size:28px;font-weight:700;margin-bottom:5px;}
+    .header p{color:#666;font-size:16px;}
+    .card{background:white;padding:25px;border-radius:15px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.08);margin-bottom:20px;
+      display:flex;justify-content:space-between;align-items:center;transition:0.3s;}
+    .card:hover{transform:translateY(-5px);}
+    .exam-info h3{font-size:20px;margin-bottom:8px;}
+    .exam-info p{color:#555;font-size:14px;margin:3px 0;}
+    .btn{padding:12px 22px;background:#667eea;border:none;border-radius:8px;
+      color:white;cursor:pointer;text-decoration:none;font-weight:600;transition:0.3s;}
+    .btn:hover{background:#5563c1;}
+    .no-exam{background:white;padding:40px;border-radius:15px;text-align:center;
+      box-shadow:0 8px 20px rgba(0,0,0,0.08);font-size:18px;color:#555;}
+  </style>
+</head>
+<body>
+<div class="sidebar">
+  <h2>Exam System</h2>
+  <a href="/dashboard">Dashboard</a>
+  <a href="/profile">View Profile</a>
+  <a href="/my-results">My Results</a>
+  <a href="/logout">Logout</a>
+</div>
+<div class="main">
+  <div class="header">
+    <h1>Welcome, <%= session.username %> 👋</h1>
+    <p>Here are your available exams</p>
+  </div>
+
+  <%- include('../partials/flash') %>
+
+  <% if (exams.length > 0) { %>
+    <% exams.forEach(exam => { %>
+    <div class="card">
+      <div class="exam-info">
+        <h3><%= exam.exam_title %></h3>
+        <p><strong>Date:</strong> <%= new Date(exam.exam_date).toLocaleDateString('en-IN') %></p>
+        <p><strong>Duration:</strong> <%= exam.duration %> Minutes</p>
+        <% if (exam.expiry_date) { %>
+          <p><strong>Expires On:</strong> <%= new Date(exam.expiry_date).toLocaleString('en-IN') %></p>
+        <% } %>
+      </div>
+      <a class="btn" href="/instructions?exam_id=<%= exam.id %>">Start Exam</a>
+    </div>
+    <% }) %>
+  <% } else { %>
+    <div class="no-exam">No active exams available right now.</div>
+  <% } %>
+</div>
+</body>
+</html>

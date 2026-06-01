@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>View Results</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+    body{background:#f4f6f9;padding:30px;}
+    .container{max-width:1000px;margin:auto;background:white;padding:25px;
+      border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,0.1);}
+    h2{text-align:center;margin-bottom:25px;color:#333;}
+    table{width:100%;border-collapse:collapse;}
+    th,td{padding:12px 15px;text-align:center;border-bottom:1px solid #ddd;}
+    th{background:#667eea;color:white;}
+    tr:nth-child(even){background:#f9f9f9;}
+    tr:hover{background:#f1f1f1;}
+    .back{display:inline-block;margin-top:20px;padding:12px 25px;
+      background:#667eea;color:white;text-decoration:none;border-radius:8px;font-weight:600;}
+    .del{padding:6px 12px;background:#e74c3c;color:white;border-radius:5px;
+      text-decoration:none;font-weight:600;}
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Student Exam Results</h2>
+  <table>
+    <tr><th>ID</th><th>Student</th><th>Exam</th><th>Score</th><th>Total</th><th>Submitted At</th><th>Action</th></tr>
+    <% results.forEach(r => { %>
+    <tr>
+      <td><%= r.id %></td>
+      <td><%= r.username %></td>
+      <td><%= r.exam_title %></td>
+      <td><%= r.score %></td>
+      <td><%= r.total_marks %></td>
+      <td><%= new Date(r.submitted_at).toLocaleString('en-IN') %></td>
+      <td><a class="del" href="/admin/delete-result/<%= r.id %>" onclick="return confirm('Delete?')">Delete</a></td>
+    </tr>
+    <% }) %>
+  </table>
+  <a href="/admin/dashboard" class="back">Back to Dashboard</a>
+</div>
+</body>
+</html>
