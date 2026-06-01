@@ -7,7 +7,8 @@ const path = require('path');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
-
+const pgSession = require('connect-pg-simple')(session);
+const db = require('./config/db');
 const app = express();
 
 // 1. HELMET — XSS, Clickjacking rokta hai
@@ -36,7 +37,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload());
 
 // 3. Secure Session
+
+
 app.use(session({
+  store: new pgSession({
+    pool: db,
+    tableName: 'session'
+  }),
   secret: process.env.SESSION_SECRET || 'examSecretKey123',
   resave: false,
   saveUninitialized: false,
@@ -47,7 +54,6 @@ app.use(session({
     sameSite: 'strict'
   }
 }));
-
 app.use(flash());
 
 app.use((req, res, next) => {
