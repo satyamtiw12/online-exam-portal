@@ -26,7 +26,7 @@ const globalLimiter = rateLimit({
   max: 100
 });
 app.use(globalLimiter);
-
+app.set('trust proxy', 1);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
